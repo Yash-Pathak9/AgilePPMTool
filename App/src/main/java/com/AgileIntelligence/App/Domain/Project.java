@@ -1,6 +1,10 @@
 package com.AgileIntelligence.App.Domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
@@ -8,13 +12,21 @@ public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank(message = "project name is required")
     private String projectName;
+    @NotBlank(message = "project identifier is required")
+    @Size(min = 4,max = 5,message = "Enter 4-5 characters")
+    @Column(updatable = false,unique = true)
     private String project_Identifier;
+    @NotBlank(message = "project description is required")
     private String description;
+    @JsonFormat(pattern = "yy-mm-dd")
     private Date start_Date;
+    @JsonFormat(pattern = "yy-mm-dd")
     private Date end_Date;
-
+    @JsonFormat(pattern = "yy-mm-dd")
     private Date createdAt;
+    @JsonFormat(pattern = "yy-mm-dd")
     private Date updatedAt;
 
     @PrePersist
