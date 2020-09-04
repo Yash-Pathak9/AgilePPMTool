@@ -4,6 +4,7 @@ import com.AgileIntelligence.App.Domain.Project;
 import com.AgileIntelligence.App.Exceptions.ProjectIdException;
 import com.AgileIntelligence.App.Repositories.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -31,6 +32,13 @@ public class ProjectService {
     }
     public Iterable<Project> findAllProjects(){
         return projectRepository.findAll();
+    }
+    public void deleteProjectByIdtentifier(String projectId){
+        Project project = projectRepository.findByProjectIdentifier(projectId.toUpperCase());
+        if(project==null){
+            throw new ProjectIdException("Project with Id: "+projectId+" Doesn't Exist");
+        }
+        projectRepository.delete(project);
     }
 
 }
