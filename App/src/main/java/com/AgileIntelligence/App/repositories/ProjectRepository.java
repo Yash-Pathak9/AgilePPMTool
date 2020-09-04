@@ -1,4 +1,4 @@
-package com.AgileIntelligence.App.repositories;
+package com.AgileIntelligence.App.Repositories;
 
 import com.AgileIntelligence.App.Domain.Project;
 import org.springframework.data.repository.CrudRepository;
