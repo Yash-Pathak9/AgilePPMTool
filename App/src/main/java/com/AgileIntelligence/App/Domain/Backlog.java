@@ -3,6 +3,8 @@ package com.AgileIntelligence.App.Domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Backlog {
@@ -16,6 +18,16 @@ public class Backlog {
     @JoinColumn(name = "project_id",nullable = false)
     @JsonIgnore
     private Project project;
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL,mappedBy = "backlog")
+    private List<ProjectTask> list = new ArrayList<>();
+
+    public List<ProjectTask> getList() {
+        return list;
+    }
+
+    public void setList(List<ProjectTask> list) {
+        this.list = list;
+    }
 
     public Project getProject() {
         return project;
