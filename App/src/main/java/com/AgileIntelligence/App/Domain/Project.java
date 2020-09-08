@@ -40,6 +40,17 @@ public class Project {
     public Project(){
 
     }
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL,mappedBy = "project")
+    private Backlog backlog;
+
+    public Backlog getBacklog() {
+        return backlog;
+    }
+
+    public void setBacklog(Backlog backlog) {
+        this.backlog = backlog;
+    }
+
     public Long getId() {
         return id;
     }
@@ -48,9 +59,7 @@ public class Project {
         this.id = id;
     }
 
-    public String getProjectName() {
-        return projectName;
-    }
+    public String getProjectName() { return projectName; }
 
     public void setProjectName(String projectName) {
         this.projectName = projectName;
